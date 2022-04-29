@@ -1,0 +1,47 @@
+{
+    name: "threesixtyViewWithHotspots",
+    props: {
+        placeholderId: "threesixtyViewWithHotspots_1",
+        imagesPath: "images/",
+        frames: [
+            "view360_img1.jpg",
+            "view360_img2.jpg",
+            "view360_img3.jpg",
+            "view360_img4.jpg",
+            "view360_img5.jpg",
+            "view360_img6.jpg",
+            "view360_img7.jpg",
+            "view360_img8.jpg",
+            "view360_img9.jpg",
+            "view360_img10.jpg"
+        ],
+        width: 970,
+        height: 465,
+        speed: 15,
+        navigationButtons: [
+            {
+                id: "threesixtyViewWithHotspots_1_leftArrow",
+                direction: "left",
+                events: [
+                    {
+                        onArrowClicked: function(Expo, obj) {Expo.designerAPI.firePixel("onLeftArrowClick_1", [{ "eventName": "intLive", "multi": true }]);}
+                    }
+                ]
+            },
+            {
+                id: "threesixtyViewWithHotspots_1_rightArrow",
+                direction: "right",
+                events: [
+                    {
+                        onArrowClicked: function(Expo, obj) {Expo.designerAPI.firePixel("onRightArrowClick_1", [{ "eventName": "intLive", "multi": true }]);}
+                    }
+                ]
+            }
+        ],
+        clickBgToHidePopups: false,
+    preventRender: true,
+    },
+    events: {
+        onImageClicked: function(Expo, obj) { Expo.designerAPI.firePixel("onImageClicked_1", [{"eventName":"intLive", "multi":true}]); }
+    }
+}

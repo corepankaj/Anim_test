@@ -1,0 +1,23 @@
+{
+    name: "scrollbar",
+    props: {
+        preventRender: true,
+        placeholderId: "scrollbar_placeholder",
+        contentId: "scrollbar_content",
+        direction: "vertical",
+        customScroll: true,
+        customScrollAlwaysShow: false,
+        customScrollTheme: "dark",
+    },
+    events: {
+        onScrolled: function(Expo) {
+            Expo.designerAPI.firePixel("Scrollbar_scrolled", [{"eventName":"intLive", "multi":false}]);
+        },
+        // onScrollStart: function(Expo) {
+            //Expo.designerAPI.firePixel("Scrollbar_scrollStart", [{"eventName":"intLive", "multi":true}]);
+        // },
+        // onScrollEnd: function(Expo) {
+            //Expo.designerAPI.firePixel("Scrollbar_scrollEnd", [{"eventName":"intLive", "multi":true}]);
+        // },
+    },
+}

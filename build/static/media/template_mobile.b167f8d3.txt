@@ -1,0 +1,102 @@
+window.designerConfig = {
+    componentVersion: 'latest',
+    init: function(Expo) {
+        Expo.setTempValue("IsComingFromPlaylist", false);
+    },
+    
+    // COMPONENT CONFIG: Designer can change the props values depending on their requirements
+    events: [
+        {
+            name: "ctaLogo",
+            type: 'click',
+            callback: function(Expo, event) {
+                Expo.designerAPI.firePixel("ctaLogo", [{"eventName":"clickLive"}]);
+                Expo.designerAPI.openUrl("https://vdx.tv","ctaLogo");
+                Expo.designerAPI.pause();
+            }
+        }
+    ],
+
+
+    // framework callbacks >>>
+
+    callbacks: {
+        mainUnitCloseCallback: function(callback, defaultVideoId) {
+            this.designerAPI.switchPlayerInTab(defaultVideoId);
+            arrowPlaylist.resetCarousel();
+            this.trigger("tabVideo", false);
+            callback(); // dont remove this
+        },
+
+        videoEndedEvent: function(videoId, eventObj) {
+            if (arrowPlaylist.windowContext.innerWidth < arrowPlaylist.windowContext.innerHeight) {
+                if (videoId == 'video1') {
+                } else if (videoId == 'video2') {
+                } else if (videoId == 'video3') {
+                }
+            } else {
+                this.designerAPI.pause();
+            }
+        },
+
+        onOrientationChange: function(obj) {
+            if (obj === "landscape") {
+                arrowPlaylist.resetAutoPlay();
+                this.resume();
+            }
+            if (obj === "portrait") {
+                arrowPlaylist.resetAutoPlay(true);
+            }
+        },
+    },
+
+
+    // components code will start from here >>>
+
+    components: [
+        {
+            name: "arrowPlaylist",
+            props: {
+                totalVideo: 2,
+                autoPlay: true,
+                arrowOpacity: 0.3,
+                hideArrowTime: 3000
+            },
+            events: {
+                videoCarouselEndEvent: function(Expo) {
+                    if (window.innerWidth <= window.innerHeight) {
+                        Expo.designerAPI.pause();
+                        Expo.setTempValue("IsComingFromPlaylist", true);
+                        anchorCLick("vdxanchor_aboutus");
+                    }
+                },
+                videoCarouselNext: function(Expo) {
+                    Expo.designerAPI.firePixel("btnPlaylistNext", [{"eventName":"intLive", "multi":true}]);
+                },
+                videoCarouselPrev: function(Expo) {
+                    Expo.designerAPI.firePixel("btnPlaylistPrevious", [{"eventName":"intLive", "multi":true}]);
+                }
+            }
+        },
+
+        {
+            name: "scrollHandler",
+            props: {
+                hideElmentsOnScroll: []
+            },
+            events: {
+                onScrollStart: function(Expo) {
+                },
+                onScrollEnd: function(Expo, obj) {
+                },
+                onCardChange: function(Expo, obj) {
+                    if (obj.selectedCard == 'vdxanchor_videotab') { //anchor name must be in lowercase
+                        Expo.designerAPI.firePixel("tabVideo", [{"eventName":"intLive", "multi":true}]);
+                        arrowPlaylist.resumeCarousel();
+                    }
+                }
+            }
+        }
+        ~
+    ]
+}

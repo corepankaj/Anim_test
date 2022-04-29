@@ -1,0 +1,69 @@
+window.onload = function(){
+	let scope = this;
+	let intid = null;
+	#C
+	#C
+
+	arrVal.forEach(function(obj){
+		obj.item = document.querySelector('div[title*="'+obj.title+'"]');
+		obj.item.style.visibility = "hidden";
+		if(obj.animating===null && obj.title.search('vid')!==-1) { obj.item.style.visibility = "visible" };
+		obj.item.setAttribute('title', obj.item.getAttribute('title').replace(obj.title,''));
+		obj.animating = false;
+	});
+	
+	#C
+	
+	function findIndex(obj){
+		var index = -1;
+		for(var j=0; j<arrVal.length; j++){
+			if(obj.title === arrVal[j].title){
+				index = j;
+			}
+		}
+		return index;
+	}
+
+	window.ctrlVAnim = function(evt){
+		for(var j=0; j<arrVal.length; j++) {
+			var obj = arrVal[j];
+			#C
+			#C
+		};
+	}
+
+	function animationEnd(obj, loop){
+		obj.index = 0;
+		if(obj.animating){
+			loop -= 1;
+			if(loop>=1){
+				animateCSS(obj, loop);
+				return;
+			}
+		}
+
+		obj.animating = false;
+	}
+	
+	function animateCSS(obj, loop) {
+		let rcls = [];
+		obj.item.classList.forEach(cls=>(cls.search('animate')!==-1) && rcls.push(cls));
+		rcls.forEach(cls=>obj.item.classList.remove(cls));
+
+		obj.item.style.setProperty('animation-delay', obj.anims[obj.index].delay+'ms');
+		obj.item.style.setProperty('-webkit-animation-delay', obj.anims[obj.index].delay+'ms');
+		obj.item.style.setProperty('--animate-duration', obj.anims[obj.index].duration+'ms');
+		obj.item.classList.add('animate__animated', 'animate__'+obj.anims[obj.index].effect);
+		obj.item.style.visibility = "visible";
+		
+		function handleAnimationEnd() {
+			obj.item.removeEventListener('animationend', handleAnimationEnd); 
+			obj.index++;
+            obj.index<obj.anims.length?animateCSS(obj, loop):animationEnd(obj, loop);
+		}
+
+		obj.item.addEventListener('animationend', handleAnimationEnd);
+	}
+	
+	#C;
+}

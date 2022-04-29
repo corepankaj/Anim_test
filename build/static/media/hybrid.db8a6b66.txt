@@ -1,0 +1,144 @@
+/* GalleryExterior */
+{
+    name: "hybridGallery", // Do not change this value
+    props: {
+        preventRender: true,
+        placeholderId: "hybridGallery_placeholder1",
+        slides: [
+            // array["image-url | videoid", "image-url | videoid", ...]
+            // array[
+            //     object{ // one of the options should be provided - imageUrl, videoId or contentId
+            //         imageUrl: "image-url",
+            //         videoId: "videoid"
+            //         contentId: "hybridGallery_contentN",
+            //         loop: false | true | 1 .. N,
+            //         overlay: { // if provided then one of the options should be also providen - contentId or contentHtml
+            //             contentId: "hybridGallery_slide1_overlay",
+            //             contentHtml: "<div style='line-height:60px; background:#ff0000; color:#ffffff; ' data-event='onCtaClick'>Learn More</div>",
+            //             style: "right:20px; bottom:60px; ",
+            //         },
+            //      },
+            //      ...
+            // ]
+            {
+                imageUrl: "images/slide_01.jpg",
+                overlay: {
+                    contentHtml: "<div style='width:100%; color:#ffffff; text-align:center; '>Slide:1</div>",
+                    style: "left:10px; top:unset; bottom:10px; ",
+                }
+            },
+            {
+                videoId: "video3",
+                loop: 1,
+                overlay: {
+                    contentHtml: "<div style='width:100%; color:#ffffff; text-align:center; '>Slide:2</div>",
+                    style: "left:10px; top:unset; bottom:10px; ",
+                }
+            },
+            {
+                imageUrl: "images/slide_02.jpg",
+                overlay: {
+                    contentHtml: "<div style='width:100%; color:#ffffff; text-align:center; '>Slide:3</div>",
+                    style: "left:10px; top:unset; bottom:10px; ",
+                }
+            },
+            {
+                imageUrl: "images/slide_03.jpg",
+                overlay: {
+                    contentHtml: "<div style='width:100%; color:#ffffff; text-align:center; '>Slide:5</div>",
+                    style: "left:10px; top:unset; bottom:10px; ",
+                }
+            }
+        ],
+        // thumbs: [ // url-template | array["url1", "url2", ...]
+        //     "images/video1.jpg",
+        //     "images/video2.jpg",
+        //     "images/video3.jpg",
+        //     "images/video4.jpg",
+        //     "images/video5.jpg"
+        // ],
+        imageFit: "cover", // cover | contain | unset | auto | initial
+        videoFit: "cover", // cover | contain | none | fill | scale-down
+        controlsPlacement: "br", // tl | tr | bl | br
+        dotNavigation: true, // true | false // enable/disable dots/thumbs navigation
+        arrowNavigation: false, // true | false // enable/disable side arrows navigation
+        swipeNavigation: "auto", // "auto" | true | false // enable/disable mouse/touch swipe navigation
+        transitionStyle: "chain", // chain | push | overlay | crossfade | fade
+        transitionDuration: 1, // transition time (sec)
+        loopSlides: true,
+        autoPlay: 3, // time (sec) to start autoplay
+        resumeAutoPlay: 10, // time (sec) to resume autoplay after stop
+        videoFreeze: 1, // time (sec) to freeze last video frame before switch to next slide
+        dotsPosition: "bottom", // top | bottom
+        dotsOverflow: "fade", // fade | scale
+        // dotsStyle: "", // css values
+        // dotStyle: {
+        //     normal: "", // css values
+        //     hover: "", // css values
+        //     active: "", // css values
+        // },
+        dotsGap: "10px", // width value
+        dotOutlineNormal: "1px solid #FFFFFF", // css border value
+        dotOutlineActive: "2px solid #FFFFFF", // css border value
+        dotSize: "10px", // {size} | {width, height}
+        dotShape: "circle", // rectangle | circle
+        dotThumbFit: "cover", // cover | contain | unset | auto | initial
+        arrowsPosition: "center", // center | top | bottom
+        arrowsMargin: "0px", // css margin value
+        // arrowStyle: {
+        //     normal: "", // css values
+        //     hover: "", // css values
+        //     disabled: "", // css values
+        // },
+        arrowSize: "44px 80px", // {size} | {width, height}
+        arrowColor: "#FFFFFF", // css color
+        arrowBackgroundColor: "rgba(0, 0, 0, 0.25)", // css color
+        // arrowImageLeft: "", // url
+        // arrowImageRight: "images/arrow_next.png", // url
+        // arrowImageFit: "contain", // cover | contain | unset | auto | initial
+        // arrowsCustomize: {
+        //     container: "left:10px; top:10px; width:100px; height:80px;",
+        //     left: "width:80px; height:100%;",
+        //     right: "width:80px; height:100%;",
+        // },
+        progressStyle: {
+            time: "#4B63DE", // css color
+            full: "rgba(75, 99, 222, 0.25)", // css color
+        },
+    },
+    events: {
+        onSlideClick: function(Expo, event) {
+            // this = Expo.designerAPI.hybridGallery.get("hybridGallery_placeholder1") // self context
+            switch(event.slide) {
+                case 1:
+                    Expo.designerAPI.firePixel("AboutGallery_Slide1_Click",[{"eventName":"clickLive"}]);
+                    Expo.designerAPI.openUrl("https://covid-19.vdx.tv", "AboutGallery_Slide1_Click");
+                    this.pause();
+                    break;
+                case 2:
+                    Expo.designerAPI.firePixel("AboutGallery_Slide2_Click",[{"eventName":"intLive"}]);
+                    this.playPause();
+                    break;
+                case 3:
+                    Expo.designerAPI.firePixel("AboutGallery_Slide3_Click",[{"eventName":"clickLive"}]);
+                    Expo.designerAPI.openUrl("https://vdx.tv/resources/case-studies", "AboutGallery_Slide3_Click");
+                    this.pause();
+                    break;
+                case 4:
+                    Expo.designerAPI.firePixel("AboutGallery_Slide4_Click",[{"eventName":"intLive"}]);
+                    Expo.designerAPI.openUrl("https://vdx.tv/about", "AboutGallery_Slide5_Click");
+                    this.playPause();
+                    break;
+            }
+        },
+        onSlideChange: function(Expo, event) {
+            Expo.trigger('slide' + event.slideTo, false);
+        },
+        onDotClick: function(Expo, event) {
+        },
+        onLeftArrowClick: function(Expo) {
+        },
+        onRightArrowClick: function(Expo) {
+        }
+    }
+}

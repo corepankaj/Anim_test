@@ -1,0 +1,48 @@
+{
+    name: "map",
+    props: {
+        maps: {
+            mapA: {
+                mapID: "mapDefault",
+                pinType: ["stores"],
+                pinValue: ["pin0"],
+                twoFingersEnabled: true,
+                common: {
+                    zoomLevel: 12,
+                    zoomControl: false,
+                    attributionControl: false
+                },
+                pin0: [{
+                    pop: {
+                        popupWidth: 250,
+                        popupHeight: 180,
+                        marginFromTop: .004,
+                        iconAnchor: [12, 35],
+                        minPopupWidth: 100,
+                        popupAnchor: [0, -35],
+                        tooltip: "visible", // visible | hidden
+                        showCloseBtn: true,
+                        openPopByDefault: true,
+                        msgString: "<div id=\"contentPopup\" align=\"center\" style=\"width:100%; height:100%;\"> tokenContentMap.label <br/> tokenContentMap.address, tokenContentMap.city, <br/> tokenContentMap.state tokenContentMap.zip <br/> tokenContentMap.phone <br/> <img id=\"popUpCount\" style=\"margin-top:5px; cursor:pointer;\" s"+"rc=\"images/map_popupCtaBtn.png\" alt=\"\" height=\"21\" width=\"70\" name=\"pin0\" onclick=\"window.parent.map.popUpCTA(this)\"></div>",
+                        popupCTA: {
+                            defaultURL: "//exponential.com",
+                            pixelID: "popUpCTAClick",
+                            popUpCTAClick: function (Expo, event) {
+                                Expo.designerAPI.firePixel("Map_popUpCTAClick", [{"eventName":"clickLive"}]);
+                                Expo.designerAPI.pause();
+                            }
+                        }
+                    },
+                    iconSize: "24x35",
+                    icon: "images/map_pin1.png",
+                    center: true,
+                    pinEvents: {
+                        rollover: function(Expo, mapObject, event) {},
+                        rollout: function(Expo, mapObject, event) {},
+                        click: function(Expo, mapObject, event) {}
+                    },
+                }],
+            },
+        },
+    },
+}

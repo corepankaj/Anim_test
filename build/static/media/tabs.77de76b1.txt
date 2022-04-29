@@ -1,0 +1,74 @@
+{
+    name: "tabs",
+    props: {
+        preventRender: true,
+        placeholderId: "tabs_placeholder2",
+        menuPlaceholderId: "tabs_menu2",
+        tabs: [
+            {
+                type: "tab",
+                title: "INTERACTIVE PRE-ROLL",
+                placeholderId: "tabs_content2_1",
+                onClick: function(Expo, event) {
+                    Expo.designerAPI.firePixel("Components_Tabs_PreRoll", [{"eventName":"intLive", "multi":true}]);
+                },
+            },
+            {
+                type: "tab",
+                title: "BILLBOARD",
+                placeholderId: "tabs_content2_2",
+                onClick: function(Expo, event) {
+                    Expo.designerAPI.firePixel("Components_Tabs_Billboard", [{"eventName":"intLive", "multi":true}]);
+                },
+            },
+            {
+                type: "tab",
+                title: "HALFPAGE",
+                placeholderId: "tabs_content2_3",
+                onClick: function(Expo, event) {
+                    Expo.designerAPI.firePixel("Components_Tabs_HalfPage", [{"eventName":"intLive", "multi":true}]);
+                },
+            },
+            {
+                type: "tab",
+                title: "ADHESION BANNER",
+                placeholderId: "tabs_content2_4",
+                onClick: function(Expo, event) {
+                    Expo.designerAPI.firePixel("Components_Tabs_Adhesion", [{"eventName":"intLive", "multi":true}]);
+                },
+            },
+        ],
+        menuDesign: {
+            direction: "horizontal",
+            orientation: "cw0",
+            theme: "default",
+            align: "center bottom",
+            overflow: "resize",
+            items: {
+                normal: {
+                    "font": "13px sofia-pro, Helvetica, Arial, sans-serif",
+                    "font-weight": "700",
+                    "color": "#000",
+                    "height": "40px",
+                    "letter-spacing": "2px",
+                    "background": "#FFFFFF",
+                },
+                hover: {
+                    "color": "#0084FF",
+                },
+                active: {
+                    "background": "#0084FF",
+                    "color": "#FFFFFF",
+                },
+            },
+        },
+        transitionStyle: "push",
+        transitionDuration: 0.2,
+    },
+    events: {
+        onTabChange: function(Expo, event) {
+        },
+        onMenuItemClick: function(Expo, event) {
+        },
+    },
+}

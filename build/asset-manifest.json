@@ -1,0 +1,34 @@
+{
+  "files": {
+    "main.css": "./static/css/main.79a6770c.chunk.css",
+    "main.js": "./static/js/main.b77d2ba3.chunk.js",
+    "main.js.map": "./static/js/main.b77d2ba3.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.1dc6c735.js",
+    "runtime-main.js.map": "./static/js/runtime-main.1dc6c735.js.map",
+    "static/js/2.a42e6cf8.chunk.js": "./static/js/2.a42e6cf8.chunk.js",
+    "static/js/2.a42e6cf8.chunk.js.map": "./static/js/2.a42e6cf8.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.79a6770c.chunk.css.map": "./static/css/main.79a6770c.chunk.css.map",
+    "static/js/2.a42e6cf8.chunk.js.LICENSE.txt": "./static/js/2.a42e6cf8.chunk.js.LICENSE.txt",
+    "static/media/index.scss": "./static/media/bg.e7b8b3f9.jpg",
+    "static/media/animCode.txt": "./static/media/animCode.16682f58.txt",
+    "static/media/animation.2201a1aa.txt": "./static/media/animation.2201a1aa.txt",
+    "static/media/comparisionSlider.txt": "./static/media/comparisionSlider.392f79a3.txt",
+    "static/media/containerGallery.txt": "./static/media/containerGallery.62fb12f0.txt",
+    "static/media/hybrid.txt": "./static/media/hybrid.db8a6b66.txt",
+    "static/media/imageGallery.txt": "./static/media/imageGallery.db4e94e4.txt",
+    "static/media/map.txt": "./static/media/map.888e932f.txt",
+    "static/media/productGallery.txt": "./static/media/productGallery.a6880e52.txt",
+    "static/media/scrollbar.txt": "./static/media/scrollbar.b933d520.txt",
+    "static/media/tabs.txt": "./static/media/tabs.77de76b1.txt",
+    "static/media/template.txt": "./static/media/template.f3b1f750.txt",
+    "static/media/template_mobile.txt": "./static/media/template_mobile.b167f8d3.txt",
+    "static/media/threeSixty.txt": "./static/media/threeSixty.406c7e63.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1dc6c735.js",
+    "static/js/2.a42e6cf8.chunk.js",
+    "static/css/main.79a6770c.chunk.css",
+    "static/js/main.b77d2ba3.chunk.js"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+    name: "imageGallery",
+    props: {
+        preventRender: true,
+        placeholderId: "imageGallery_placeholder2",
+        slides: "images/gal_img{x}.jpg",
+        thumbs: "images/gal_t{x}.jpg",
+        totalSlides: 4,
+        imageFit: "cover",
+        dotNavigation: true,
+        arrowNavigation: true,
+        swipeNavigation: "auto",
+        transitionStyle: "chain",
+        transitionDuration: 1,
+        loopSlides: true,
+        autoPlay: 3,
+        resumeAutoPlay: 0,
+        dotsPosition: "bottom",
+        dotsOverflow: "fade",
+        dotSize: "20px",
+        dotThumbSize: "cover",
+        dotOutlineNormal: "1px solid #999",
+        dotOutlineActive: "2px solid #333",
+        arrowSize: "60px 60px",
+        arrowColor: "#29ADE4",
+        arrowsMargin: "0 120px",
+        arrowStyle: {
+            normal: "background-color:rgba(255, 255, 255, 0.5); opacity:0.9; ",
+            hover: "background-color:rgba(0, 0, 0, 0.25); opacity:1; ",
+        },
+    },
+    events: {
+        // onSlideClick: function(Expo, event) {
+            // Expo.designerAPI.fireDynamicPixel("gallery_slide_click_" + event.slide, [{"eventName":"clickLive", "multi":true}]);
+            // Expo.designerAPI.openUrl("http://exponential.com/", "gallery_slide_click_" + event.slide);
+            // Expo.designerAPI.pause();
+        // },
+        onSlideChange: function(Expo, event) {
+            switch(event.slideTo) {
+                case 1:
+                    Expo.designerAPI.firePixel("ImageGallery_Slide1", [{"eventName":"intLive", "multi":true}]);
+                    break;
+                case 2:
+                    Expo.designerAPI.firePixel("ImageGallery_Slide2", [{"eventName":"intLive", "multi":true}]);
+                    break;
+                case 3:
+                    Expo.designerAPI.firePixel("ImageGallery_Slide3", [{"eventName":"intLive", "multi":true}]);
+                    break;
+                case 4:
+                    Expo.designerAPI.firePixel("ImageGallery_Slide4", [{"eventName":"intLive", "multi":true}]);
+                    break;
+            }
+        },
+        // onLeftArrowClick: function(Expo) {
+            // Expo.designerAPI.firePixel("ImageGallery_left_arrow_click", [{"eventName":"intLive", "multi":true}]);
+        // },
+        // onRightArrowClick: function(Expo) {
+            // Expo.designerAPI.firePixel("ImageGallery_right_arrow_click", [{"eventName":"intLive", "multi":true}]);
+        // },
+    },
+}

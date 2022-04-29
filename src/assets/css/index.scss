@@ -1,0 +1,13 @@
+@import 'vars';
+
+@font-face {
+    font-family: Bahnschrift;
+    src:url("../fonts/Bahnschrift.ttf");
+} 
+
+body {
+	padding:0;
+	margin:0;
+	font-family:'Bahnschrift';
+	background-image: url("../images/bg.jpg");
+}

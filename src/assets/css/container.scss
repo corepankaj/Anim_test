@@ -1,0 +1,52 @@
+@import 'vars';
+
+.container-title{
+	color:white;
+	font-size: 24px;
+	text-align: center;
+	padding-top:1%;
+	padding-bottom:1%;
+	width: 91%;
+}
+
+.preview-box{
+	width:50px;
+	height: 50px;
+	background-color: red;
+}
+
+.panel{
+	background-color: #E3E6E8;
+}
+
+.footer{
+	height:10vh;
+	background:#FFFFFF;
+	font-size: 14px;
+}
+
+.object{
+	height: auto;
+	margin-left: 10px;
+	margin-right: 10px;
+	max-width: '100%'
+}
+
+.code{
+	background-color:#404040;
+	color:#fff;
+	padding:10px;
+	height:35px;
+	font-size: 14px;
+}
+
+.code-hlight {
+	height: 63vh;
+	overflow-y:auto;
+	margin:0px;
+}
+
+h4{
+	padding: 2px;
+	margin: 2px;
+}

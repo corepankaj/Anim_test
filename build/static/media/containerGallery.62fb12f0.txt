@@ -1,0 +1,92 @@
+{
+    name: "containerGallery",
+    props: {
+        preventRender: true,
+        placeholderId: "tabs_content1_3", // containerGallery_placeholder1
+        slides: [
+            { placeholderId: "containerGallery_slide1_1" },
+            { placeholderId: "scrollbar_placeholder" },
+            { placeholderId: "imageGallery_placeholder2" },
+            { placeholderId: "containerGallery_slide1_4" },
+            { placeholderId: "containerGallery_slide1_5" },
+            { placeholderId: "containerGallery_slide1_6" },
+            { placeholderId: "containerGallery_slide1_7" },
+        ],
+        thumbs: "images/container_thumbs_{x}.png",
+        dotNavigation: true,
+        arrowNavigation: true,
+        swipeNavigation: false,
+        transitionStyle: "push",
+        transitionDuration: 1,
+        loopSlides: true,
+        autoPlay: 0,
+        resumeAutoPlay: 3,
+        dotsPosition: "top",
+        dotsOverflow: "scale",
+        dotOutlineNormal: "1px solid #0084FF",
+        dotOutlineActive: "2px solid #0084FF",
+        dotSize: "40px",
+        dotShape: "circle",
+        dotThumbSize: "cover",
+        arrowsMargin: "0 8px",
+        arrowSize: "44px 80px",
+        arrowColor: "#000",
+        arrowStyle: {
+            "normal": "opacity:0.5; background-color:rgba(128, 128, 128, 0.1); ",
+            "hover": "opacity:1; ",
+            "disabled": "opacity:0.1; ",
+        },
+    },
+    events: {
+        onSlideChange: function(Expo, event) {
+            switch(event.slideFrom) {
+                case 7:
+                    Expo.designerAPI.pause();
+                    break;
+            }
+            switch(event.slideTo) {
+                case 1:
+                    Expo.designerAPI.firePixel("containerGallery_Map", [{"eventName":"intLive", "multi":true}]);
+                    if (!Expo.getTempValue("activeMapTab")) {
+                        Expo.setTempValue("activeMapTab", true);
+                        if (Expo.designerAPI.getDynamicData().rawData || Expo.designerAPI.getDynamicData().rawData === null) {
+                            var mapDefault = document.querySelector('div[data-expo-event="EXPOEVENT_mapDefault"]');
+                            mapDefault.style.zIndex = -1;
+                        }
+                        map.generateMap({mapID: "mapA", dynamicData: Expo.designerAPI.getDynamicData().rawData, localData: "assets/map_default.json", defaultImageURL: "images/map_default.jpg", noDataImage: "images/map_no_data.jpg"});
+                    }
+                    break;
+                case 2:
+                    Expo.designerAPI.firePixel("containerGallery_Scrollbar", [{"eventName":"intLive", "multi":true}]);
+                    Expo.designerAPI.components.get("scrollbar_placeholder").render(true);
+                    break;
+                case 3:
+                    Expo.designerAPI.firePixel("containerGallery_ImageGallery", [{"eventName":"intLive", "multi":true}]);
+                    Expo.designerAPI.components.get("imageGallery_placeholder2").render(true);
+                    break;
+                case 4:
+                    Expo.designerAPI.firePixel("containerGallery_ComparisonSlider", [{"eventName":"intLive", "multi":true}]);
+                    Expo.designerAPI.components.get("comparisonSlide").render(true);
+                    break;
+                case 5:
+                    Expo.designerAPI.firePixel("containerGallery_ThreeSixtyView", [{"eventName":"intLive", "multi":true}]);
+                    Expo.designerAPI.components.get("threesixtyViewWithHotspots_1").render(true);
+                    break;
+                case 6:
+                    Expo.designerAPI.firePixel("containerGallery_Tabs", [{"eventName":"intLive", "multi":true}]);
+                    Expo.designerAPI.components.get("tabs_placeholder2").render(true);
+                    break;
+                case 7:
+                    Expo.designerAPI.firePixel("containerGallery_HybridGallery", [{"eventName":"intLive", "multi":true}]);
+                    Expo.designerAPI.components.get("hybridGallery_placeholder1").render(true);
+                    break;
+            }
+        },
+        onDotClick: function(Expo, event) {
+        },
+        onLeftArrowClick: function(Expo) {
+        },
+        onRightArrowClick: function(Expo) {
+        },
+    },
+}

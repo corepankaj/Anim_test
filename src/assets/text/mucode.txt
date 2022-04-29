@@ -1,0 +1,20 @@
+function init(){
+	setTimeout(function(){ initilize(); intid = setInterval(function(){window.ctrlVAnim();},200) }, 100);
+}
+
+let _tint_id = setInterval(function(){
+	if(window.designerSharedObject.designerAPI.creativeModel.currentState.stateConfig.state === "mainunit"){
+		clearInterval(_tint_id);
+		init();		
+		var name = document.querySelector(".rm-close") !== null?"rm-close":"closeContainer";
+		$("."+name).click(function() {
+			clearInterval(intid);
+			for (var j = 0; j < arrVal.length; j++) {
+				arrVal[j].inview = false;
+				arrVal[j].loop = arrVal[j].tloop;
+				arrVal[j].item.classList.remove("animate__animated", "animate__" + arrVal[j].effect);
+				arrVal[j].item.style.visibility = "hidden";
+			}
+		})
+	}
+}, 300);

@@ -1,0 +1,23 @@
+function initilize(){		
+	for(var j=0; j<arrVal.length; j++){
+		var obj = arrVal[j];
+		obj.parent = getParent(obj.item, 6);
+		~
+	}
+}
+
+function getParent(obj, depth){
+	var tobj = obj;
+	if(tobj == null){ return null; }
+	
+	for(var j=1; j<=depth; j++){
+		if(tobj.parentElement.getAttribute('id') == 'page'){ return null };
+		if(tobj.parentElement.getAttribute('class').search('wp-panel') != -1){
+			return tobj.parentElement;
+		}else{
+			tobj = tobj.parentElement;
+		}
+	}
+	
+	return null;
+}

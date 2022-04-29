@@ -1,0 +1,15 @@
+var dragObj = {}
+document.addEventListener("scroll", function(){ window.ctrlVAnim(); }, false);
+document.addEventListener("touchstart", 
+							function(evt){
+								dragObj.iy = evt.touches[0].clientY;
+							}, false);
+							
+document.addEventListener("touchmove", 
+							function(evt){
+								if(Math.abs(evt.changedTouches[0].clientY - dragObj.iy)>=40){
+									window.ctrlVAnim();
+								}
+							}, false);
+							
+document.addEventListener("touchend", function(){ dragObj.iy = 0; }, false);

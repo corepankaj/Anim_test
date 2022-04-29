@@ -1,0 +1,30 @@
+ {
+    name: "comparisonSlide",
+    props: {
+        preventRender: true,
+        placeholderId: "comparisonSlide",
+        leftImageName: "images/comparison_before.png",
+        rightImageName: "images/comparison_after.png",
+        slideIcon: "images/comparison_drag_item.png",
+        slideIconPosition: "center",
+        animationOn: true,
+        startingPosition: 50,
+        clickToMoveOn: true,
+        sliderWidth: 3,
+        sliderColor: "rgba(0, 0, 0, .3)",
+        sliderStyle: "dotted",
+        backgroundImageSize: "cover",
+        preloaderColor: "rgba(0, 179, 239, .9)",
+    },
+    events: {
+        onSliderClicked: function(Expo, obj) {
+            Expo.designerAPI.firePixel("ComparisonSlide_onSliderClicked", [{"eventName":"intLive", "multi":true}]);
+        },
+        onLeftImageClicked: function(Expo, obj) {
+            //Expo.designerAPI.firePixel("ComparisonSlide_onLeftImageClicked", [{"eventName":"intLive", "multi":true}]);
+        },
+        onRightImageClicked: function(Expo, obj) {
+            //Expo.designerAPI.firePixel("ComparisonSlide_onRightImageClicked", [{"eventName":"intLive", "multi":true}]);
+        }
+    }
+}

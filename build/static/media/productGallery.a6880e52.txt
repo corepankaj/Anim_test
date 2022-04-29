@@ -1,0 +1,116 @@
+{
+    name: "productGallery", // Do not change this value
+    props: {
+        preventRender: true,
+        placeholderId: "productGallery_placeholder1",
+        dataProvider: {
+            jsonUrl: "assets/products.json", // url to fetch raw data, if rawData is not provided
+            card: {
+                thumb: "products[{x}].imageURL",
+                price: {
+                    path: "products[{x}].deal",
+                    post: function(val) {
+                        return "<span" + (val.match("¢") ? " class='cent'" : "") + ">" + val + "</span>";
+                    },
+                },
+                rollback: {
+                    path: "products[{x}].rollback",
+                    post: function(val) {return val === true || val === "true" ? "<div class='gallery-rollback'></div>" : ""},
+                },
+                title:{
+                    path: "products[{x}].title",
+                    post:function(val){ return val.toUpperCase(); }
+                },
+                description: "products[{x}].description",
+                url: "products[{x}].buyOnlineLinkURL",
+                sku: "products[{x}].sku"
+            }
+        },
+        css: "\
+            .gallery-card {width:100%; height:100%; font-family:__Helvetica_5,sans-serif; display:flex; flex-direction:column; align-items:stretch; overflow:hidden;}\
+            .gallery-thumb {display:flex; justify-content:center; align-items:center;}\
+            .gallery-thumb img {width:360px; height:380px; object-fit:contain;}\
+            .gallery-row {margin-top:-220px; padding:12px 15px; display:flex; flex-direction:column;} \
+            .gallery-cta {margin-left:20px; width:148px; height:36px; margin-bottom:10px; background:url(images/cta_btn.svg); background-repeat:no-repeat; cursor:pointer;}\
+            .gallery-title {line-height:24px;padding:0px 6px 0; font-weight:bold; font-size:19px; color:#1F1F1F; overflow:hidden;}\
+            .gallery-discription { line-height:19px; padding:0px 6px 0; font-size:15px; color:#1F1F1F; overflow:hidden;}\
+        ", // inline css to be used with template and processor
+        exceptionHtml: "<img style='width:100%; height:100%; border:0; object-fit:contain; cursor:pointer;' src='images/items_no_data.jpg' data-event='onErrorClick'/>", // valid html code
+        // galleryHtml: "<div></div>", // valid html
+        // slideHtml: "<div></div>", // valid html
+        cardHtml: "\
+                <div class='gallery-card'>\
+                <div class='gallery-thumb'><img src='{{thumb}}'/></div>\
+                <div class='gallery-row'>\
+                    <div style='height:155px;'>\
+                        <div class='gallery-title' data-overflow='fit;6;ellipsis'>{{title}}</div>\
+                        <div class='gallery-discription'>{{description}}</div>\
+                    </div>\
+                    <div style='display:flex; flex-direction:row; justify-content:space-between;'>\
+                        <div style='font-size:26px; font-weight:bold;'>{{price}}</div>\
+                        <div class='gallery-cta' data-event='onCtaClick'></div>\
+                    </div>\
+                </div>\
+            </div>\
+        ", // valid html code
+        cardsGrid: "1x1", // {colums}x{rows}
+        cardsGap: "", // "{size}" | "{horizontal} {vertical}" // size in px/% of gaps between cards
+        cardSize: "280px 380px", // "auto" | "{size}" | "{width} {height}" // size in px/% of container
+        cardsAlign: "top", // "{horizontal&vertical}" | "{horizontal} {vertical}" // top | bottom | left | right | space-between | space-around | space-evenly | stretch | center
+        slidePadding: "41px 0 0", // "{size}" | "{horizontal} {vertical}" | other // size in px of slide inner padding, so cards wouldn't sticke to slide border
+        preloaderImage: "images/items_imageloader.png", // url
+        dotNavigation: false, // true | false // enable/disable dots/thumbs navigation
+        arrowNavigation: true, // true | false // enable/disable side arrows navigation
+        swipeNavigation: "auto", // "auto" | true | false // enable/disable mouse/touch swipe navigation
+        transitionStyle: "push", // chain | push | overlay | crossfade | fade
+        transitionDuration: 1, // transition time (sec)
+        loopSlides: true,
+        autoPlay: 0, // time (sec) to start autoplay
+        resumeAutoPlay: 10, // time (sec) to resume autoplay after stop
+        dotsPosition: "bottom", // top | bottom
+        dotsOverflow: "fade", // fade | scale
+        
+        dotOutlineNormal: "1px solid #FFFFFF", // css border value
+        dotOutlineActive: "2px solid #FFFFFF", // css border value
+        dotSize: "10px", // {size} | {width, height}
+        dotShape: "circle", // rectangle | circle
+        dotThumbFit: "contain", // cover | contain | auto | unset | initial
+        arrowsPosition: "center", // center | top | bottom
+        arrowsMargin: "0 120px", // css margin value
+        arrowStyle: {
+            normal: "background:transparent; background-repeat:no-repeat;", // css values
+            hover: "background:transparent; background-repeat:no-repeat;", // css values
+            disabled: "", // css values
+        },
+        arrowSize: "22px 40px", // {size} | {width, height}
+        arrowImageLeft: "images/arr_lt.png", // url
+        arrowImageRight: "images/arr_rt.png", // url
+        arrowImageFit: "contain", // cover | contain | auto | unset | initial
+        arrowsCustomize: {
+            container: "left:0px; top:200px;",
+            //left: "width:22px; height:100%;",
+            //right: "width:22px; height:100%;",
+        }
+    },
+    events: {
+        onDataError: function(Expo) {
+            Expo.designerAPI.firePixel("DataError", [{"eventName":"intLive"}]);
+        },
+        onErrorClick: function(Expo) {
+            Expo.designerAPI.firePixel("DataError_Click", [{"eventName":"clickLive"}]);
+            Expo.designerAPI.openUrl("https://www.popeyes.com","DataError_Click");
+            Expo.designerAPI.pause();
+        },
+        onCtaClick: function(Expo, event) {
+            Expo.designerAPI.fireDynamicPixel('ctaTopPicks_' + event.index, [{"eventName":"clickLive", "data":{"itemTitle":event.product.title, "itemID":event.index}, "isBillable":true}]);
+            Expo.designerAPI.openUrl(event.product.url, 'ctaTopPicks_' + event.index);
+            Expo.designerAPI.pause();
+        },
+        onLeftArrowClick: function(Expo) {
+            Expo.designerAPI.firePixel("TopItems_Prev_Click", [{"eventName":"intLive", "multi":true}]);
+        },
+        onRightArrowClick: function(Expo) {
+            Expo.designerAPI.firePixel("TopItems_Next_Click", [{"eventName":"intLive", "multi":true}]);
+        }
+    }
+}
